@@ -1,0 +1,115 @@
+{{!< default}}
+
+{{! The comment above "< default" means - insert everything in this file into
+    the {body} of the default.hbs template, which contains our header/footer. }}
+
+{{! Everything inside the #post tags pulls data from the post }}
+{{#post}}
+    {{#if image}}
+    <div class="featured-image-single">
+        <img src="{{image}}" />
+    </div>
+    {{/if}}
+<main class="content" role="main">
+  <article class="{{post_class}}">
+
+<div class=" col-md-7 col-lg-7">
+  <div class="loop-content">
+
+
+ <header class="post-header">
+        <div class="post-add">
+             {{#author}}
+            <div class="post-add-author"><img src="{{image}}"> </div>
+            <div class="post-add-name"><a href="{{url}}">{{name}} </a> </div>
+            {{/author}}
+            <time datetime="{{date published_at timeago="true"}}">{{date published_at timeago="true"}}</time>
+        </div>
+        
+             <h1>{{title}}</h1>
+        </header>
+
+       <div class="single-post">
+            {{ content}}
+        </div>
+
+<!-- Post Pagination -->
+<div class="post-navigation">
+ {{#next_post}}
+              <div class="post-next">
+                  <a href="{{url}}" title="{{title}}">
+                      {{title}} &rarr;
+                  </a> 
+              </div>
+              {{/next_post}}
+  
+  {{#prev_post}}
+              <div class="post-prev">
+                <a href="{{url}}" title="{{title}}">
+                  &larr; {{title}} 
+                  </a>
+              </div>
+              {{/prev_post}}
+            <div class="clearfix"></div>
+            </div> <!-- .post-navigation -->
+
+
+
+<!-- Disqus Comment -->
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+function disqus_comment(){
+   {{> config}}
+    var disqus_identifier = '{{post.id}}';
+ 
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    }
+    disqus_comment(); 
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div> <!-- loop content -->
+</div> <!-- col-md-7  -->
+
+<div class="col-md-5 sidebar">
+    <div class="about widget">
+        <h3>Featured Post</h3>
+        {{#get "posts" limit="all" filter="featured:true"}}
+    {{#foreach posts}}
+        <div class="featured-post">
+           {{#if image}} <img src="{{image}}">{{/if}}
+        <a href="{{slug}}">{{title}}</a>
+        <div class="clearfix"></div>
+    </div>
+
+    {{/foreach}}
+{{/get}}
+    </div>
+
+     <div class="text widget">
+        <h3>Text</h3>
+    You can put a dummy text here.
+    </div>
+    <div class="tags widget">
+        <h3>Tags</h3>
+    {{#get "tags"  limit="all"}}{{tags separator=""}}{{/get}}
+    </div>
+</div>
+
+
+<div class="clearfix"></div>
+
+</article>
+
+</main>
+
+
+
+{{/post}}

@@ -1,0 +1,37 @@
+<div class="wrapper-content">
+{{#foreach posts}}
+
+<div class="col-md-12 col-lg-12 odd">
+
+<article class="{{post_class}}">
+    {{#if image}}
+    <div class="featured-image">
+        <img src="{{image}}" />
+    </div>
+    {{/if}}
+
+<div class="loop-content">
+       <header class="post-header">
+        <div class="post-add">
+            {{#author}}
+            <div class="post-add-author"><img src="{{image}}"> </div>
+            <div class="post-add-name"><a href="{{url}}">{{name}} </a> </div>
+            {{/author}}
+            <time datetime="{{date published_at timeago="true"}}">{{date published_at timeago="true"}}</time>
+        </div>
+        
+             <h1><a href="{{url}}">{{title}}</a></h1>
+        </header>
+                           
+                            <p>{{content words="50"}}</p>
+</div>
+ <div class="clearfix"></div>
+</article>
+</div>
+{{/foreach}}
+<div class="clearfix"></div>
+</div> <!-- wrapper-content -->
+{{! Previous/next page links - displayed on every page }}
+<div class="pagination">
+{{pagination}}
+</div>

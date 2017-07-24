@@ -1,0 +1,29 @@
+{{!< default}}
+{{! The tag above means - insert everything in this file into the {body} of the default.hbs template }}
+
+{{! The main content area on the homepage }}
+<main id="content" class="content" role="main">
+{{#author}}
+<div class="featured-image-single">
+<img src="{{cover}}">
+</div>
+<div class="container">
+<div  class="row">
+
+<div class="col-md-6 col-md-offset-3">
+
+<div class="archive--author">
+<img src="{{image}}">
+<div class="archive--author-name">{{name}}</div>
+<div class="archive--author-bio">{{{bio}}}</div>
+<div class="archive--author-place icon-location">{{location}}  <span class="icon-website"><a href="{{website}}">{{website}}</a></span></div>
+</div>
+{{/author}}
+</div>
+<div class="clearfix"></div>
+    {{! The tag below includes the post loop - partials/loop.hbs }}
+    {{> "loop"}}
+
+</div>
+</div>
+</main>

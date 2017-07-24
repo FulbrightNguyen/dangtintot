@@ -1,0 +1,94 @@
+{{!< default}}
+
+{{! The comment above "< default" means - insert everything in this file into
+    the {body} of the default.hbs template, which contains our header/footer. }}
+
+{{! Everything inside the #post tags pulls data from the post }}
+{{#post}}
+    {{#if image}}
+    <div class="featured-image-single">
+        <img src="{{image}}" />
+    </div>
+    {{/if}}
+<main class="content" role="main">
+<div class="container">
+<div class="row">
+  <article class="{{post_class}}">
+
+<div class="col-md-offset-2 col-md-8 col-lg-8">
+
+ <header class="post-header">
+        <div class="post-add">
+             {{#author}}
+            <div class="post-add-author"><img src="{{image}}"> </div>
+            <div class="post-add-name"><a href="{{url}}">{{name}} </a> </div>
+            {{/author}}
+            <time datetime="{{date published_at timeago="true"}}">{{date published_at timeago="true"}}</time>
+        </div>
+        
+             <h1>{{title}}</h1>
+        </header>
+
+       <div class="single-post">
+            {{ content}}
+        </div>
+
+<!-- Post Pagination -->
+<div class="post-navigation">
+ {{#next_post}}
+              <div class="post-next">
+                <img src="{{image}}" title="{{title}}">
+                  <a href="{{url}}" title="{{title}}">
+                      {{title}}
+                  </a>
+              </div>
+              {{/next_post}}
+  
+  {{#prev_post}}
+              <div class="post-prev">
+                <img src="{{image}}" title="{{title}}">
+                <a href="{{url}}" title="{{title}}">
+                   {{title}}
+                  </a>
+              </div>
+              {{/prev_post}}
+            <div class="clearfix"></div>
+            </div> <!-- .post-navigation -->
+
+
+
+<!-- Disqus Comment -->
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+function disqus_comment(){
+   {{> config}}
+    var disqus_identifier = '{{post.id}}';
+ 
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    }
+    disqus_comment(); 
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+</div> <!-- col-md-8  -->
+
+
+
+<div class="clearfix"></div>
+
+</article>
+</div> <!-- row -->
+</div> <!-- container -->
+</main>
+
+
+
+{{/post}}
